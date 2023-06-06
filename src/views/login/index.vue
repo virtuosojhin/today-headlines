@@ -1,7 +1,9 @@
 <template>
   <div class="login-container">
     <!-- //导航栏 -->
-    <van-nav-bar class="page-nav-bar" title="登录" />
+    <van-nav-bar class="page-nav-bar" title="登录" >
+      <van-icon class="page-nav-icon" slot="left" name="cross" @click="$router.back()"/>
+    </van-nav-bar>
 
     <!-- 登陆表单 -->
     <!--
@@ -56,6 +58,10 @@
         <van-button  block type="info" native-type="submit">登陆</van-button>
       </div>
     </van-form>
+    <span style="font-size: 5px;">
+      13911111111
+      246810
+    </span>
       </div>
     </template>
 <script>
@@ -115,6 +121,9 @@ export default {
         const { data } = await login(user)
         this.$store.commit('setUser', data.data)
         this.$toast.success('登陆成功')
+        // 登陆成功，跳转到回原来页面
+        // 但是使用back（）不严谨
+        this.$router.back()
       } catch (error) {
         if (error.response.status === 400) {
           this.$toast.fail('手机号或验证码错误')
