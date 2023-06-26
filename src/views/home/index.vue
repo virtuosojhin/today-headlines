@@ -9,6 +9,7 @@
         size="small"
         round
         icon="search"
+        to="/search"
       >搜索</van-button>
     </van-nav-bar>
     <!-- /导航栏 -->
@@ -45,6 +46,8 @@
       <channel-edit
       :my-channels="channels"
       :active="active"
+      @userChannels="updateUserChannels"
+      @update-active="onUpdateActive"
       />
       </van-popup>
 
@@ -87,7 +90,16 @@ export default {
       } catch (error) {
         this.$toast('获取用户频道失败')
       }
+    },
+    updateUserChannels (item) {
+      // 函数内部 更新处理 数据
+      return this.channelsArr.push(item)
+    },
+    onUpdateActive (index, isChannelEditShow = true) {
+      this.active = index
+      this.isChannelEditShow = isChannelEditShow
     }
+
   }
 }
 </script>
